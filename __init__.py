@@ -9,3 +9,4 @@ db = SQLAlchemy(app)
 
 from blog import views
 from author import views
+
