@@ -18,5 +18,13 @@ class RegisterForm(Form):
 
 
         
-        
+class LoginForm(Form):
+    username = StringField('Username', [
+        validators.Required(),
+        validators.Length(min=4, max=25)
+        ])
+    password = PasswordField('Password', [
+        validators.Required(),
+        validators.Length(min=4, max=80)
+        ])
         
