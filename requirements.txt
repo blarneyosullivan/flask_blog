@@ -3,3 +3,7 @@ pymysql
 flask-sqlalchemy
 flask-script
 flask-wtf
+flask-migrate
+py-bcrypt
+python-slugify
+flask-markdown
