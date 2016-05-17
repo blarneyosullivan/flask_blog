@@ -41,7 +41,7 @@ def login():
                     session.pop('next')
                     return redirect(next)
                 else: 
-                    return redirect(url_for('login_success'))
+                    return redirect(url_for('index'))
             else:
                 error = "Incorrect username and password1"
         else:
