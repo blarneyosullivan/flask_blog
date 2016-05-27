@@ -7,7 +7,7 @@ from flask_blog import app
 
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
-
+ 
 manager.add_command("runserver", Server(
     use_debugger = True,
     use_reloader = True,

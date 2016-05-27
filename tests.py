@@ -28,7 +28,7 @@ class UserTest(unittest.TestCase):
         conn.execute('CREATE DATABASE ' + app.conn['BLOG_DATABASE_NAME'])
         db.create_all()
         conn.close()
-        
+         
         self.app = app.test_client()
         
     def tearDown(self):

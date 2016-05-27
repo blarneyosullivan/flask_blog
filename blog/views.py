@@ -135,7 +135,6 @@ def article(slug):
     return render_template('blog/article.html', post=post)
     
     
-    
 @app.route('/delete/<int:post_id>')
 @author_required
 def delete(post_id):

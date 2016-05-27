@@ -37,3 +37,4 @@ class PostForm(Form):
     new_category = StringField('New Category')
     
     
+    

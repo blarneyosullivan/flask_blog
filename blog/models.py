@@ -39,7 +39,6 @@ class Post(db.Model):
         return uploaded_images.url(self.image)
         #return UPLOADED_IMAGES_URL(self.image)
     
-
     def __init__(self, blog, author, title, body, category, image=None, slug=None, publish_date = None, live=True):
         self.blog_id = blog.id # passed as object
         self.author_id = author.id # object
