@@ -17,7 +17,7 @@ class UserTest(unittest.TestCase):
         db_username = app.config['DB_USERNAME']
         db_password = app.config['DB_PASSWORD']
         db_host = app.config['DB_HOST']
-        self.db_uri = "mysql+pymysql://%s:%s@%s" % (db_username, db_password, db_host)
+        self.db_uri = "mysql+pymysql://%s:%s@%s/" % (db_username, db_password, db_host)
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False
         app.config['BLOG_DATABASE_NAME'] = 'test_blog'
@@ -25,7 +25,7 @@ class UserTest(unittest.TestCase):
         engine = sqlalchemy.create_engine(self.db_uri)
         conn = engine.connect()
         conn.execute('commit')
-        conn.execute('CREATE DATABASE ' + app.conn['BLOG_DATABASE_NAME'])
+        conn.execute('CREATE DATABASE ' + app.config['BLOG_DATABASE_NAME'])
         db.create_all()
         conn.close()
          
@@ -36,8 +36,43 @@ class UserTest(unittest.TestCase):
         engine = sqlalchemy.create_engine(self.db_uri)
         conn = engine.connect()
         conn.execute('commit')
-        conn.execute('DROP DATABASE ' + app.conn['BLOG_DATABASE_NAME'])
+        conn.execute('DROP DATABASE ' + app.config['BLOG_DATABASE_NAME'])
         conn.close()
+        
+    def create_blog(self):
+        return self.app.post('/setup', data=dict(
+            name='my test blog',
+            fullname='steve jones',
+            email='steve@boll.com',
+            username='steve',
+            password='test',
+            confirm='test'),
+        follow_redirects=True     )
+        
+    def test_create_blog(self):
+        rv = self.create_blog()
+        #print( rv.data)
+        
+        assert 'Blog created' in str(rv.data)
+        
+        
+if __name__ == '__main__':
+    
+    unittest.main()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
