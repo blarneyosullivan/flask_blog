@@ -49,11 +49,45 @@ class UserTest(unittest.TestCase):
             confirm='test'),
         follow_redirects=True     )
         
+    def login(self, username, password):
+        return self.app.post('/login', data=dict(
+            username = username,
+            password = password),
+            follow_redirects=True)
+            
+    def logout(self):
+        return self.app.get('/logout',
+            follow_redirects=True)
+            
     def test_create_blog(self):
         rv = self.create_blog()
         #print( rv.data)
         
         assert 'Blog created' in str(rv.data)
+        
+    def hhtest_login_logout(self):
+        self.create_blog()
+        rv = self.login('steve','sonal')
+        print(rv.data)
+        #assert 'user steve logged in' in str(rv.data)
+        #assert "user steve"
+        assert "user steve" in str(rv.data)
+
+
+    def test_login_logout(self):
+        self.create_blog()
+        rv = self.login('steve','ssssonal')
+        print(rv.data)
+        #assert 'user steve logged in' in str(rv.data)
+        #assert "user steve"
+        assert "Incorrect username and password1" in str(rv.data)
+
+
+        
+    def kktest_logout(self):
+        self.create_blog()
+        rv = self.logout()
+        #assert 'logge1d' in str(rv.data)
         
         
 if __name__ == '__main__':

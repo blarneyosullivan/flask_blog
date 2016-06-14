@@ -1,5 +1,5 @@
 from flask_blog import app
-from flask import render_template, redirect, url_for, session, request
+from flask import render_template, redirect, url_for, session, request, flash
 from author.form import RegisterForm, LoginForm
 from author.models import Author
 from author.decorators import login_required
@@ -36,6 +36,8 @@ def login():
                 
                 session['username'] = form.username.data
                 session['is_author'] = author.is_author
+                #flash("user %s" % form.username.data )
+                flash("user %s " % form.username.data)
                 if 'next' in session:
                     next = session.get('next')
                     session.pop('next')
@@ -72,6 +74,7 @@ def loggedin():
     
 @app.route('/logout')
 def logout():
+    #flash("logged out")
     session.pop('username')
     session.pop('is_author')
     return redirect('index')
